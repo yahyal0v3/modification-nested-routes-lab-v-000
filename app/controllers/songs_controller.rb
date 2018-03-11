@@ -25,7 +25,7 @@ class SongsController < ApplicationController
   end
 
   def new
-    if Artist.exists?(params[:artist_id])
+    if params[:artist_id] && Artist.exists?(params[:artist_id])
       @song = Song.new(artist_id: params[:artist_id])
     else 
       redirect_to artists_path
