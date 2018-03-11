@@ -52,7 +52,7 @@ class SongsController < ApplicationController
         redirect_to artist_songs_path(artist)
       end
     else
-      @song = Post.find(params[:id])
+      @song = Song.find(params[:id])
     end  
   end
 
