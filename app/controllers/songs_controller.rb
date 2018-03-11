@@ -43,10 +43,17 @@ class SongsController < ApplicationController
   end
 
   def edit
-    @song = Song.find(params[:id])
-
-    if params[:artist_id] && @song.artist == params[:artist_id]
-      
+    if params[:artist_id]
+      artist = Artist.find_by(id: params[:artist_id])
+      if artist.nil?
+        redirect_to artists_path
+      else
+        @post = artist.posts.find_by(id: params[:id])
+        redirect_to artist_posts_path(artist), alert: "Post not found." if @post.nil?
+      end
+    else
+      @post = Post.find(params[:id])
+    end  
   end
 
   def update
